@@ -15,11 +15,35 @@ let nysl = new Vue({
     vigenciaSeguro: "",
     fondoCaja: "",
     porcentual: "",
-    juicio: "",
-    aysa: "",
-    abl: "",
+    juicio: false,
+    aysaConsorcio: true,
+    ablConsorcio: true,
+    juicioDescripcion: "",
 
   },
-  methods: {},
-  computed: {}
+  methods: {
+
+  },
+  computed: {
+    aysa: function() {
+      if (this.aysaConsorcio) {
+        return "se abona por consorcio";
+      } else {
+        return "se abona de forma particular"
+      }
+    },
+    abl: function() {
+      if (this.ablConsorcio) {
+        return "se abona por consorcio";
+      } else {
+        return "se abona de forma particular"
+      }
+    },
+    juicioTitle: function() {
+      if (this.juicio) {
+        return "Informamos que el edificio se encuentra con un juicio por"
+      }
+    }
+
+  }
 });

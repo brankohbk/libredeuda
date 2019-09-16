@@ -7,18 +7,23 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Libre Deuda 0.1 BETA</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+
 </head>
 
 <body>
+
   <div id="app">
     <h1>LIBRE DEUDA</h1>
+
+
+
     <div class="container col-12">
-      <div class="row">
-        <div id="inputs" class=" col-6 p-2">
+      <div id="panels" class="row d-flex">
+        <div id="inputs" class="col-md-6 col-12">
           <H2>INGRESO DE DATOS</H2>
           <form>
             <div class="col-12">
-
               <div class="row">
                 <fieldset>
                   <legend>CONSORCIO</legend>
@@ -75,6 +80,15 @@
               <div class="row">
                 <fieldset>
                   <legend>JUICIOS</legend>
+                  <div class="custom-control custom-switch">
+                    <input v-model="juicio" type="checkbox" class="custom-control-input" id="switchjuicios">
+                    <label class="custom-control-label" for="switchjuicios">El consorcio tiene juicios en proceso.</label>
+                  </div>
+                  <div>
+                    <textarea v-if="juicio" v-model="juicioDescripcion" name="descripcionJuicio" id="descripcionJuicio" cols="30" rows="10" placeholder="Ingrese descripcion de los procesos judiciales activos"></textarea>
+                  </div>
+
+
 
                 </fieldset>
               </div>
@@ -82,25 +96,20 @@
                 <fieldset>
                   <legend>IMPUESTOS Y SERVICIOS</legend>
                   <div>
-                    AySA por consorcio:
-                    <label>Sí
-                            <input type="radio" name="aysa" id="aysaSi" value="aysaConsorcio">
-                          </label>
-                    <label>
-                            No
-                            <input type="radio" name="aysa" id="aysaNo" value="aysaPartiicular" checked>
-                          </label>
+
+                    <div class="custom-control custom-switch">
+                      <input v-model="aysaConsorcio" value="false" type="checkbox" class="custom-control-input" id="switchAysa">
+                      <label class="custom-control-label" for="switchAysa">AySA por consorcio.</label>
+                    </div>
+
 
                   </div>
                   <div>
-                    ABL por consorcio:
-                    <label>Sí
-                  <input type="radio" name="abl" id="ablSi" value="ablConsorcio">
-                </label>
-                    <label>
-                  No
-                  <input type="radio" name="abl" id="ablNo" value="ablPartiicular" checked>
-                </label>
+
+                    <div class="custom-control custom-switch">
+                      <input v-model="ablConsorcio" value="false" type="checkbox" class="custom-control-input" id="switchAbl">
+                      <label class="custom-control-label" for="switchAbl">ABL por consorcio.</label>
+                    </div>
                   </div>
 
                 </fieldset>
@@ -112,8 +121,8 @@
           </form>
         </div>
 
-        <div v-cloak id="output" class="col-6">
-          <h2>OUTPUT</h2>
+        <div v-cloak id="output" class="col-md-6 col-12">
+          <h2>VISTA PREVIA</h2>
           <div class="border">
 
 
@@ -138,14 +147,13 @@
               El edificio cuenta con un fondo de caja de $ {{fondoCaja}} (NUMERO A TEXTOpesos ciento veintisiete mil trescientos cincuenta y tres con 27/100); teniendo la UF Nº {{uf}} un porcentual de {{porcentual}} %.
             </p>
             <p>
-              Informamos que el edificio se encuentra con un juicio por cobro de expensas de la UF N°57 piso 5° “I” caratulado “Consorcio de Propietarios Paraguay 2081/87 c/ Tempone Lydia Rosa”. Expediente CIV 75694/2017, Juzgado 95 ubicado en la calle Talcahuano 550
-              Piso 6°.
+              {{juicioTitle}} {{juicioDescripcion}}
             </p>
             <p>
-              AySA {{aysa}} se abona por consorcio.
+              AySA {{aysa}}.
             </p>
             <p>
-              ABL {{abl}} se abona por consorcio.
+              ABL {{abl}}.
             </p>
             <p>
               Sin otro particular, saluda a Usted cordialmente
@@ -155,6 +163,9 @@
 
         </div>
       </div>
+
+      <!-- ejemplos -->
+      <!-- cobro de expensas de la UF N°57 piso 5° “I” caratulado “Consorcio de Propietarios Paraguay 2081/87 c/ Tempone Lydia Rosa”. Expediente CIV 75694/2017, Juzgado 95 ubicado en la calle Talcahuano 550 Piso 6°. -->
 
     </div>
 
