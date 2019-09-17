@@ -19,6 +19,7 @@ let nysl = new Vue({
     aysaConsorcio: true,
     ablConsorcio: true,
     juicioDescripcion: "",
+    asegurado: [],
 
   },
   methods: {
@@ -29,21 +30,17 @@ let nysl = new Vue({
       if (this.aysaConsorcio) {
         return "se abona por consorcio";
       } else {
-        return "se abona de forma particular"
+        return "se abona de forma particular";
       }
     },
     abl: function() {
       if (this.ablConsorcio) {
         return "se abona por consorcio";
       } else {
-        return "se abona de forma particular"
+        return "se abona de forma particular";
       }
     },
-    juicioTitle: function() {
-      if (this.juicio) {
-        return "Informamos que el edificio se encuentra con un juicio por"
-      }
-    }
+
 
   }
 });

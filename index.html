@@ -15,119 +15,188 @@
 
   <div id="app">
     <h1>LIBRE DEUDA</h1>
-
-
-
-    <div class="container col-12">
-      <div id="panels" class="row d-flex">
+    <div class="container col-11">
+      <div id="panels" class="row d-flex justify-content-between">
         <div id="inputs" class="col-md-6 col-12">
           <H2>INGRESO DE DATOS</H2>
-          <form>
-            <div class="col-12">
-              <div class="row">
-                <fieldset>
-                  <legend>CONSORCIO</legend>
-
-                  <label>Calle y número:
-                <input v-model="consorcio" type="text" name="consorcio" id="consorcio">
-              </label>
-                  <label>Departamento:
-                <input v-model="depto" type="text" name="departamento" id="departamento">
-              </label>
-                  <label>Unidad Funcional:
-                  <input v-model="uf" type="text" name="uf" id="uf">
-                </label>
-                  <label>Propietario:
-                    <input v-model="propietario" type="text" name="propietario" id="propietario">
-                  </label>
-
-                </fieldset>
+          <!-- ACORDEON -->
+          <div class="accordion" id="acordeon">
+            <div class="card">
+              <div class="card-header" id="headingConsorcio">
+                <h2 class="mb-0">
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseConsorcio" aria-expanded="false" aria-controls="collapseOne">
+                      CONSORCIO
+                    </button>
+                </h2>
               </div>
-
-              <div class="row">
-                <fieldset>
-                  <legend>FECHAS</legend>
-                  <label>Fecha:
-                <input v-model="fecha" type="date" name="consorcio" id="fecha">
-              </label>
-                  <label>Último periodo liquidado:
-                <input v-model="ultimaLiquidacion" type="text" name="consorcio" id="ultimaLiquidacion">
-              </label>
-                  <label>Vencimiento:
-                  <input v-model="vencimiento" type="date" name="vencimiento" id="vencimiento">
-                </label>
-                </fieldset>
+              <div id="collapseConsorcio" class="collapse" aria-labelledby="headingConsorcio" data-parent="#acordeon">
+                <div class="card-body">
+                  <fieldset>
+                    <label>Calle y número:
+                      <input v-model="consorcio" type="text" name="consorcio" id="consorcio">
+                    </label>
+                    <label>Departamento:
+                      <input v-model="depto" type="text" name="departamento" id="departamento">
+                    </label>
+                    <label>Unidad Funcional:
+                        <input v-model="uf" type="text" name="uf" id="uf">
+                      </label>
+                    <label>Propietario:
+                          <input v-model="propietario" type="text" name="propietario" id="propietario">
+                        </label>
+                  </fieldset>
+                </div>
               </div>
-
-              <div class="row">
-                <fieldset>
-                  <legend>SALDOS</legend>
-                  <label>Saldo pendiente:
-                <input v-model="deuda" type="number" name="consorcio" id="pendiente">
-              </label>
-                  <label>Expensas netas:
-                <input v-model="expensaNeta" type="text" name="consorcio" id="expensas">
-              </label>
-                </fieldset>
-              </div>
-              <div class="row">
-                <fieldset>
-                  <legend>SEGUROS</legend>
-
-                </fieldset>
-              </div>
-
-              <div class="row">
-                <fieldset>
-                  <legend>JUICIOS</legend>
-                  <div class="custom-control custom-switch">
-                    <input v-model="juicio" type="checkbox" class="custom-control-input" id="switchjuicios">
-                    <label class="custom-control-label" for="switchjuicios">El consorcio tiene juicios en proceso.</label>
-                  </div>
-                  <div>
-                    <textarea v-if="juicio" v-model="juicioDescripcion" name="descripcionJuicio" id="descripcionJuicio" cols="30" rows="10" placeholder="Ingrese descripcion de los procesos judiciales activos"></textarea>
-                  </div>
-
-
-
-                </fieldset>
-              </div>
-              <div class="row">
-                <fieldset>
-                  <legend>IMPUESTOS Y SERVICIOS</legend>
-                  <div>
-
-                    <div class="custom-control custom-switch">
-                      <input v-model="aysaConsorcio" value="false" type="checkbox" class="custom-control-input" id="switchAysa">
-                      <label class="custom-control-label" for="switchAysa">AySA por consorcio.</label>
-                    </div>
-
-
-                  </div>
-                  <div>
-
-                    <div class="custom-control custom-switch">
-                      <input v-model="ablConsorcio" value="false" type="checkbox" class="custom-control-input" id="switchAbl">
-                      <label class="custom-control-label" for="switchAbl">ABL por consorcio.</label>
-                    </div>
-                  </div>
-
-                </fieldset>
-              </div>
-
-
             </div>
+            <div class="card">
+              <div class="card-header" id="headingFechas">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFechas" aria-expanded="false" aria-controls="collapseTwo">
+                      FECHAS
+                    </button>
+                </h2>
+              </div>
+              <div id="collapseFechas" class="collapse" aria-labelledby="headingFechas" data-parent="#acordeon">
+                <div class="card-body">
+                  <fieldset>
+                    <label>Fecha:
+                      <input v-model="fecha" type="date" name="consorcio" id="fecha">
+                    </label>
+                    <label>Último periodo liquidado:
+                      <input v-model="ultimaLiquidacion" type="text" name="consorcio" id="ultimaLiquidacion">
+                    </label>
+                    <label>Vencimiento:
+                        <input v-model="vencimiento" type="date" name="vencimiento" id="vencimiento">
+                      </label>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingSaldos">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSaldos" aria-expanded="false" aria-controls="collapseSaldos">
+                      SALDOS
+                    </button>
+                </h2>
+              </div>
+              <div id="collapseSaldos" class="collapse" aria-labelledby="headingSaldos" data-parent="#acordeon">
+                <div class="card-body">
+                  <fieldset>
+                    <label>Saldo pendiente:
+                      <input v-model="deuda" type="number" name="consorcio" id="pendiente">
+                    </label>
+                    <label>Expensas netas:
+                      <input v-model="expensaNeta" type="text" name="consorcio" id="expensas">
+                    </label>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingSeguros">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeguros" aria-expanded="false" aria-controls="collapseThree">
+                      SEGUROS
+                      </button>
+                </h2>
+              </div>
+              <div id="collapseSeguros" class="collapse" aria-labelledby="headingSeguros" data-parent="#acordeon">
+                <div class="card-body">
+                  <fieldset>
+                    <p>
+                      El edificio se encuentra asegurado contra:
+                    </p>
+                    <ul>
+                      <li>
+                        <div class="custom-control custom-switch">
+                          <input v-model="asegurado" type="checkbox" class="custom-control-input" value="incendio" id="seguroIncendio">
+                          <label class="custom-control-label" for="seguroIncendio">Incendio.</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="custom-control custom-switch">
+                          <input v-model="asegurado" type="checkbox" class="custom-control-input" value="rotura de cristales" id="seguroCristales">
+                          <label class="custom-control-label" for="seguroCristales">Rotura de cristales.</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="custom-control custom-switch">
+                          <input v-model="asegurado" type="checkbox" class="custom-control-input" value="robo" id="seguroRobo">
+                          <label class="custom-control-label" for="seguroRobo">Robo.</label>
+                        </div>
+                      </li>
+                    </ul>
+                    <div><label>En la compañía aseguradora:
+                        <input v-model="aseguradora" type="text" name="seguro" id="aseguradora">
+                        </label></div>
+                    <div><label>Póliza N°:
+                        <input v-model="poliza" type="text" name="seguro" id="poliza">
+                        </label></div>
+                    <div><label>Vigente hasta:
+                            <input v-model="vigenciaSeguro" type="date" name="seguro" id="vigencia">
+                            </label></div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingJuicios">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseJuicios" aria-expanded="false" aria-controls="collapseSaldos">
+                      JUICIOS
+                      </button>
+                </h2>
+              </div>
+              <div id="collapseJuicios" class="collapse" aria-labelledby="headingJuicios" data-parent="#acordeon">
+                <div class="card-body">
+                  <fieldset>
 
-          </form>
+                    <div class="custom-control custom-switch">
+                      <input v-model="juicio" type="checkbox" class="custom-control-input" id="switchjuicios">
+                      <label class="custom-control-label" for="switchjuicios">El consorcio tiene juicios en proceso.</label>
+                    </div>
+                    <div>
+                      <textarea v-if="juicio" v-model="juicioDescripcion" name="descripcionJuicio" id="descripcionJuicio" cols="80%" rows="10" placeholder="Ingrese descripcion de los procesos judiciales activos"></textarea>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingImpuestos">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseImpuestos" aria-expanded="false" aria-controls="collapseSaldos">
+                        IMPUESTOS Y SERVICIOS
+                        </button>
+                </h2>
+              </div>
+              <div id="collapseImpuestos" class="collapse" aria-labelledby="headingImpuestos" data-parent="#acordeon">
+                <div class="card-body">
+                  <fieldset>
+                    <div>
+                      <div class="custom-control custom-switch">
+                        <input v-model="aysaConsorcio" value="false" type="checkbox" class="custom-control-input" id="switchAysa">
+                        <label class="custom-control-label" for="switchAysa">AySA por consorcio.</label>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="custom-control custom-switch">
+                        <input v-model="ablConsorcio" value="false" type="checkbox" class="custom-control-input" id="switchAbl">
+                        <label class="custom-control-label" for="switchAbl">ABL por consorcio.</label>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div v-cloak id="output" class="col-md-6 col-12">
           <h2>VISTA PREVIA</h2>
           <div class="border">
-
-
             <p>
-
               Buenos Aires, {{fecha}}
             </p>
             <p>
@@ -135,19 +204,18 @@
             </p>
             <p>
               Por la presente, en mi carácter de administrador del consorcio de la calle {{consorcio}}, informo que la UF Nº {{uf}} ({{depto}}) a nombre de {{propietario}} al día de la fecha registra deuda en concepto de expensas por un total de $ {{deuda}} .
-
             </p>
             <p>
               Las expensas se abonan mes vencido. Quedan pendientes por abonar las expensas del periodo {{ultimaLiquidacion}} con vencimiento el {{vencimiento}} por un monto aproximado de $ {{expensaNeta}}.-
             </p>
             <p>
-              El edificio está asegurado contra incendios en la Compañía Aseguradora {{aseguradora}}, Póliza Nº {{poliza}}, con vigencia hasta el {{vigenciaSeguro}}
+              El edificio está asegurado contra <span v-for="item in asegurado">{{item}}, </span>en la Compañía Aseguradora {{aseguradora}}, Póliza Nº {{poliza}}, con vigencia hasta el {{vigenciaSeguro}}
             </p>
             <p>
               El edificio cuenta con un fondo de caja de $ {{fondoCaja}} (NUMERO A TEXTOpesos ciento veintisiete mil trescientos cincuenta y tres con 27/100); teniendo la UF Nº {{uf}} un porcentual de {{porcentual}} %.
             </p>
             <p>
-              {{juicioTitle}} {{juicioDescripcion}}
+              <span v-if="juicio">Informamos que el edificio se encuentra con un juicio por {{juicioDescripcion}}.</span>
             </p>
             <p>
               AySA {{aysa}}.
