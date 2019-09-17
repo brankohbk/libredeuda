@@ -1,4 +1,4 @@
-let nysl = new Vue({
+let ld = new Vue({
   el: '#app',
   data: {
     fecha: "",
@@ -6,10 +6,11 @@ let nysl = new Vue({
     uf: "",
     depto: "",
     propietario: "",
-    deuda: "",
+    deuda: 0,
+    fondoCaja: 0,
+    expensaNeta: 0,
     ultimaLiquidacion: "",
     vencimiento: "",
-    expensaNeta: "",
     aseguradora: "",
     poliza: "",
     vigenciaSeguro: "",
@@ -20,6 +21,7 @@ let nysl = new Vue({
     ablConsorcio: true,
     juicioDescripcion: "",
     asegurado: [],
+    textoCompleto: "",
 
   },
   methods: {
@@ -44,3 +46,39 @@ let nysl = new Vue({
 
   }
 });
+
+function Export2Doc(element, filename = 'Libre deuda_' + ld.consorcio + '_UF' + ld.uf + '_dto' + ld.depto) {
+  var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Libre Deuda - www.restpoint.com.ar</title></head><body>";
+  var postHtml = "</body></html>";
+  var html = preHtml + document.getElementById(element).innerHTML + postHtml;
+
+  var blob = new Blob(['\ufeff', html], {
+    type: 'application/msword'
+  });
+
+  // Specify link url
+  var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+
+  // Specify file name
+  // filename = filename ? filename + '.doc' : 'document.doc';
+
+  // Create download link element
+  var downloadLink = document.createElement("a");
+
+  document.body.appendChild(downloadLink);
+
+  if (navigator.msSaveOrOpenBlob) {
+    navigator.msSaveOrOpenBlob(blob, filename);
+  } else {
+    // Create a link to the file
+    downloadLink.href = url;
+
+    // Setting the file name
+    downloadLink.download = filename;
+
+    //triggering the function
+    downloadLink.click();
+  }
+
+  document.body.removeChild(downloadLink);
+}
