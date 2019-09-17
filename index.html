@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Libre Deuda 0.1 BETA</title>
+  <title>Libre Deuda 1.0 - Restpoint.com.ar</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styles.css">
 
@@ -13,7 +13,7 @@
 
 <body class="bg-dark">
   <div id="app">
-    <h1 class="text-warning ml-5">LIBRE DEUDA</h1>
+    <h1 class="text-warning ml-5">LIBRE DEUDA | <small class="text-secondary">Administración Bouteiller-Jordan</small></h1>
     <div class="container col-11">
       <div id="panels" class="row d-flex justify-content-between mb-5 pb-5 bg-light">
         <div id="inputs" class="col-md-6 col-12 mb-5">
@@ -34,11 +34,14 @@
                     <label class="">Calle y número:
                       <input v-model="consorcio" type="text" name="consorcio" id="consorcio">
                     </label>
-                    <label class="">Departamento:
-                      <input v-model="depto" type="text" name="departamento" id="departamento">
-                    </label>
                     <label>Unidad Funcional:
                         <input v-model="uf" type="text" name="uf" id="uf">
+                      </label>
+                    <label class="">Piso:
+                        <input v-model="piso" type="text" name="departamento" id="letra">
+                      </label>
+                    <label class="">Letra/Departamento:
+                        <input v-model="letra" type="text" name="departamento" id="letra">
                       </label>
                     <label>Propietario:
                         <input v-model="propietario" type="text" name="propietario" id="propietario">
@@ -63,12 +66,17 @@
                 <div class="card-body">
                   <fieldset>
                     <label>Fecha:
-                      <input v-model="fecha" type="date" name="consorcio" id="fecha">
+                      <input v-model="fecha" type="date" name="fecha" id="fecha">
                     </label>
                     <label>Último periodo liquidado:
-                      <input v-model="ultimaLiquidacion" type="text" name="consorcio" id="ultimaLiquidacion">
+                        <input v-model="ultimaLiquidacion" type="date" name="ultimaLiquidacion" id="ultimaLiquidacion">
+
+                      <!-- <select name="meses" id="meses">
+                        <option v-for="mes in meses" :value="mes" @click="armarUltimaLiquidacion('mes')">{{mes}}</option>
+                      </select>
+                      <input v-model="anhoLiquidado" type="text" name="anhoLiquidado" id="anhoLiquidado"> -->
                     </label>
-                    <label>Vencimiento:
+                    <label>Vencimiento de la última liquidación:
                         <input v-model="vencimiento" type="date" name="vencimiento" id="vencimiento">
                       </label>
                   </fieldset>
@@ -209,7 +217,7 @@
           <h2>VISTA PREVIA</h2>
           <div v-cloak class="border" id="output">
             <p>
-              Buenos Aires, {{fecha}}
+              Buenos Aires, {{fechaFormateada}}
             </p>
             <p>
               CERTIFICADO DE LIBRE DEUDA
@@ -219,16 +227,16 @@
               expensas <span v-if="deuda>0">por un total de $ {{deuda}}</span>.
             </p>
             <p>
-              Las expensas se abonan mes vencido. Quedan pendientes por abonar las expensas del periodo {{ultimaLiquidacion}} con vencimiento el {{vencimiento}} por un monto aproximado de $ {{expensaNeta}}.-
+              Las expensas se abonan mes vencido. Quedan pendientes por abonar las expensas del periodo {{ultimaLiquidacionFormateada}} con vencimiento el {{vencimientoFormateado}} por un monto aproximado de $ {{expensaNeta}}.-
             </p>
             <p>
-              El edificio está asegurado contra <span v-for="item in asegurado">{{item}}, </span>en la Compañía Aseguradora {{aseguradora}}, Póliza Nº {{poliza}}, con vigencia hasta el {{vigenciaSeguro}}
+              El edificio está asegurado contra <span v-for="item in asegurado">{{item}}, </span>en la Compañía Aseguradora {{aseguradora}}, Póliza Nº {{poliza}}, con vigencia hasta el {{vigenciaSeguroFormateado}}
             </p>
             <p>
-              El edificio cuenta con un fondo de caja de $ {{fondoCaja}} (NUMERO A TEXTOpesos ciento veintisiete mil trescientos cincuenta y tres con 27/100); teniendo la UF Nº {{uf}} un porcentual de {{porcentual}} %.
+              El edificio cuenta con un fondo de caja de $ {{fondoCaja}} ({{fondoCajaTexto}}); teniendo la UF Nº {{uf}} un porcentual de {{porcentual}} %.
             </p>
             <p>
-              <span v-if="juicio">Informamos que el edificio se encuentra con un juicio por {{juicioDescripcion}}.</span>
+              <p v-if="juicio" style="white-space: pre-line;">Informamos que el edificio se encuentra con un juicio por{{ juicioDescripcion }} .</p>
               <span v-else>Informamos que el edificio no posee procesos judiciales en curso de nuestro conocimiento.</span>
             </p>
             <p>
@@ -242,7 +250,7 @@
 
             </p>
           </div>
-          <button v-cloak class="mt-3 float-right btn btn-success" onclick="Export2Doc('output');">Exportar como .doc</button>
+          <button v-cloak class="mt-3 float-right btn btn-success" onclick="Export2Doc('output');">&#x1F4BE; Exportar como .doc</button>
           <!-- FIN DE PREVIEW -->
           <div v-if="!$data" class="spinner-border text-info" role="status">
             <span class="sr-only">Loading...</span>
@@ -262,12 +270,14 @@
     <div class="container text-center">
       <span class="text-muted"> <p>
         Made in &#x1F1E6;&#x1F1F7; by <a target="_blank" href="http://www.restpoint.com.ar">Restpoint</a>
-      </p> &copy; 2019 All right reserved.</span>
+      </p> &copy; 2019 All rights reserved.</span>
     </div>
   </footer>
   <script src="js/jquery-3.3.1.slim.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/vue.min.js"></script>
+  <script src="js/moment.min.js"></script>
+  <script src="js/num2string.js"></script>
   <script src="js/app.js"></script>
 </body>
 

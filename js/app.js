@@ -1,10 +1,11 @@
 let ld = new Vue({
   el: '#app',
   data: {
-    fecha: "",
+    fecha: '',
     consorcio: "",
     uf: "",
-    depto: "",
+    piso: "",
+    letra: "",
     propietario: "",
     deuda: 0,
     fondoCaja: 0,
@@ -22,9 +23,16 @@ let ld = new Vue({
     juicioDescripcion: "",
     asegurado: [],
     textoCompleto: "",
+    meses: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+    anhoLiquidado: "2019",
 
   },
   methods: {
+    armarUltimaLiquidacion: function(mes) {
+      this.ultimaLiquidacion = "" + mes + " del " + this.anhoLiquidado;
+    }
+
+
 
   },
   computed: {
@@ -42,10 +50,40 @@ let ld = new Vue({
         return "se abona de forma particular";
       }
     },
+    depto: function() {
+      if (this.letra != "") {
+        return "Piso " + this.piso + ' Depto "' + this.letra + '"';
+      } else {
+        return "Piso " + this.piso;
+      }
+    },
+    fondoCajaTexto: function() {
+      return numeroALetras(this.fondoCaja);
+    },
+    // hoy: function() {
+    //   var today = new Date();
+    //   return moment(today).format('LL');
+    // },
+    fechaFormateada: function() {
+      return moment(this.fecha).format('LL');
+    },
+    ultimaLiquidacionFormateada: function() {
+      return moment(this.ultimaLiquidacion).format('MMMM YYYY');
+    },
+    vencimientoFormateado: function() {
+      return moment(this.vencimiento).format('LL');
+    },
+    vigenciaSeguroFormateado: function() {
+      return moment(this.vigenciaSeguro).format('LL');
+    },
+
+
 
 
   }
 });
+
+moment.locale("es");
 
 function Export2Doc(element, filename = 'Libre deuda_' + ld.consorcio + '_UF' + ld.uf + '_dto' + ld.depto) {
   var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Libre Deuda - www.restpoint.com.ar</title></head><body>";
@@ -82,3 +120,8 @@ function Export2Doc(element, filename = 'Libre deuda_' + ld.consorcio + '_UF' + 
 
   document.body.removeChild(downloadLink);
 }
+
+function cargarHoy() {
+  ld.fecha = ld.hoy;
+}
+cargarHoy();
