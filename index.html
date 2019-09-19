@@ -7,19 +7,22 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Libre Deuda 1.0 - Restpoint.com.ar</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link href="css/animatedcss.css" rel="stylesheet" type="text/css">
+
   <link rel="stylesheet" href="css/styles.css">
+
 
 </head>
 
 <body class="bg-dark">
   <div id="app">
-    <h1 class="text-warning ml-5">LIBRE DEUDA | <small class="text-secondary">Administración Bouteiller-Jordan</small></h1>
+    <h1 class="text-warning ml-5"><span class="">LIBRE DEUDA | </span><small class="text-secondary animated fadeIn delay-2s">Administración Bouteiller-Jordan</small></h1>
     <div class="container col-11">
-      <div id="panels" class="row d-flex justify-content-between mb-5 pb-5 bg-light">
-        <div id="inputs" class="col-md-6 col-12 mb-5">
+      <div id="panels" class="row d-flex justify-content-between mb-5 pb-5 bg-light animated fadeInRight">
+        <div id="inputs" class="col-md-6 col-12 mb-5 ">
           <H2>INGRESO DE DATOS</H2>
           <!-- ACORDEON -->
-          <div class="accordion" id="acordeon">
+          <div class="accordion animated fadeInUp delay-1s" id="acordeon">
             <div class="card">
               <div class="card-header" id="headingConsorcio">
                 <h2 class="mb-0">
@@ -35,7 +38,7 @@
                       <input v-model="consorcio" type="text" name="consorcio" id="consorcio">
                     </label>
                     <label>Unidad Funcional:
-                        <input v-model="uf" type="text" name="uf" id="uf">
+                        <input v-model="uf" type="number" name="uf" id="uf">
                       </label>
                     <label class="">Piso:
                         <input v-model="piso" type="text" name="departamento" id="letra">
@@ -47,7 +50,7 @@
                         <input v-model="propietario" type="text" name="propietario" id="propietario">
                       </label>
                     <label>Porcentual:
-                        <input v-model="porcentual" type="text" name="porcentual" id="porcentual">%
+                        <input v-model="porcentual" type="number" name="porcentual" id="porcentual">%
                       </label>
                   </fieldset>
                 </div>
@@ -65,10 +68,10 @@
               <div id="collapseFechas" class="collapse" aria-labelledby="headingFechas" data-parent="#acordeon">
                 <div class="card-body">
                   <fieldset>
-                    <label>Fecha:
+                    <label>Hoy:
                       <input v-model="fecha" type="date" name="fecha" id="fecha">
                     </label>
-                    <label>Último periodo liquidado:
+                    <label>Próximo periodo a ser liquidado:
                         <input v-model="ultimaLiquidacion" type="date" name="ultimaLiquidacion" id="ultimaLiquidacion">
 
                       <!-- <select name="meses" id="meses">
@@ -76,7 +79,7 @@
                       </select>
                       <input v-model="anhoLiquidado" type="text" name="anhoLiquidado" id="anhoLiquidado"> -->
                     </label>
-                    <label>Vencimiento de la última liquidación:
+                    <label>Vencimiento de la próxima liquidación:
                         <input v-model="vencimiento" type="date" name="vencimiento" id="vencimiento">
                       </label>
                   </fieldset>
@@ -96,13 +99,13 @@
                 <div class="card-body">
                   <fieldset>
                     <label>Saldo pendiente: 
-                      $<input v-model="deuda" type="number" name="consorcio" id="pendiente">
+                      $<input v-model="deuda" type="number" name="pendiente" id="pendiente">
                     </label>
                     <label>Expensas netas:
-                      $<input v-model="expensaNeta" type="text" name="consorcio" id="expensas">
+                      $<input v-model="expensaNeta" type="number" name="expensas" id="expensas">
                     </label>
                     <label>Fondo de caja:
-                      $<input v-model="fondoCaja" type="text" name="fondoCaja" id="fondoCaja">
+                      $<input v-model="fondoCaja" type="number" name="fondoCaja" id="fondoCaja">
                     </label>
                   </fieldset>
                 </div>
@@ -174,7 +177,9 @@
                       <label class="custom-control-label" for="switchjuicios">El consorcio tiene juicios en proceso.</label>
                     </div>
                     <div>
-                      <textarea v-if="juicio" v-model="juicioDescripcion" name="descripcionJuicio" id="descripcionJuicio" cols="80%" rows="10" placeholder="Ingrese descripcion de los procesos judiciales activos"></textarea>
+                      <transition name="custom-classes-transition" enter-active-class="animated zoomInDown" leave-active-class="animated zoomOutUp">
+                        <textarea v-if="juicio" v-model="juicioDescripcion" name="descripcionJuicio" id="descripcionJuicio" class="form-control" rows="10" placeholder="Ingrese descripcion de los procesos judiciales activos"></textarea>
+                      </transition>
                     </div>
                   </fieldset>
                 </div>
@@ -212,45 +217,65 @@
             <!-- FIN DEL ACORDEON -->
           </div>
         </div>
+        <!-- 
+          PREVIEW
+         -->
 
         <div id="preview" class="col-md-6 col-12">
           <h2>VISTA PREVIA</h2>
-          <div v-cloak class="border" id="output">
-            <p>
-              Buenos Aires, {{fechaFormateada}}
+
+          <div v-cloak class="border animated fadeInUp delay-1s" id="output ">
+            <p align=center style='font-size:10.0pt; mso-bidi-font-size:12.0pt;font-family: "Arial", "sans-serif" '>Nicolás Jordan<span style='mso-tab-count:1 '>            </span><span align=center>ADMINISTRACION
+                DE CONSORCIOS</span><span style='mso-tab-count:1 '>            </span><span align=right>J. Luciano Bouteiller</span>
             </p>
-            <p>
+            <hr>
+            <p align=right style='text-align:right '>
+              Buenos Aires, {{moment(fecha).format('LL')}}
+            </p>
+            <p align=center style='text-align:center '>
               CERTIFICADO DE LIBRE DEUDA
             </p>
             <p>
               Por la presente, en mi carácter de administrador del consorcio de la calle {{consorcio}}, informo que la UF Nº {{uf}} ({{depto}}) a nombre de {{propietario}} al día de la fecha <span v-if="deuda==0">no </span>registra deuda en concepto de
-              expensas <span v-if="deuda>0">por un total de $ {{deuda}}</span>.
+              expensas <span v-if="deuda>0">por un total de $ {{saldoFormateado(deuda)}}</span>.
             </p>
             <p>
-              Las expensas se abonan mes vencido. Quedan pendientes por abonar las expensas del periodo {{ultimaLiquidacionFormateada}} con vencimiento el {{vencimientoFormateado}} por un monto aproximado de $ {{expensaNeta}}.-
+              Las expensas se abonan mes vencido. Quedan pendientes por abonar las expensas del periodo {{moment(ultimaLiquidacion).format('MMMM YYYY')}} con vencimiento el {{moment(vencimiento).format('LL')}} por un monto aproximado de $ {{saldoFormateado(expensaNeta)}}.-
             </p>
             <p>
-              El edificio está asegurado contra <span v-for="item in asegurado">{{item}}, </span>en la Compañía Aseguradora {{aseguradora}}, Póliza Nº {{poliza}}, con vigencia hasta el {{vigenciaSeguroFormateado}}
+              El edificio está asegurado contra <span v-for="item in asegurado">{{item}}, </span>en la Compañía Aseguradora {{aseguradora}}, Póliza Nº {{poliza}}, con vigencia hasta el {{moment(this.vigenciaSeguro).format('LL')}}
             </p>
             <p>
-              El edificio cuenta con un fondo de caja de $ {{fondoCaja}} ({{fondoCajaTexto}}); teniendo la UF Nº {{uf}} un porcentual de {{porcentual}} %.
+              El edificio cuenta con un fondo de caja de $ {{saldoFormateado(fondoCaja)}} ({{fondoCajaTexto}}); teniendo la UF Nº {{uf}} un porcentual de {{porcentual}} %.
             </p>
             <p>
-              <p v-if="juicio" style="white-space: pre-line;">Informamos que el edificio se encuentra con un juicio por{{ juicioDescripcion }} .</p>
+              <p v-if="juicio" style="white-space: pre-line;">Informamos que el edificio se encuentra con un juicio por {{juicioDescripcion}} .</p>
               <span v-else>Informamos que el edificio no posee procesos judiciales en curso de nuestro conocimiento.</span>
             </p>
             <p>
-              AySA {{aysa}}.
+              AySA {{porConsorcio(aysaConsorcio)}}.
             </p>
             <p>
-              ABL {{abl}}.
+              ABL {{porConsorcio(ablConsorcio)}}.
             </p>
             <p>
               Sin otro particular, saluda a Usted cordialmente
 
             </p>
+
+            <p class="MsoFooter">
+
+              <hr>
+              <p align=center style='font-size:10.0pt; mso-bidi-font-size:12.0pt;font-family: "Arial", "sans-serif" '>Azcuénaga 1571 PB “E”<span style='mso-tab-count:1 '>            </span>
+                <span align=center>1426-Cap.Fed</span><span style='mso-tab-count:1 '>            </span>
+                <span align=right>Tel/Fax : 4807-3961 || 4807-3726</span>
+              </p>
+            </p>
+
+
+            <!-- FIN DE OUTPUT -->
           </div>
-          <button v-cloak class="mt-3 float-right btn btn-success" onclick="Export2Doc('output');">&#x1F4BE; Exportar como .doc</button>
+          <button v-cloak class="mt-3 float-right btn btn-success" @click="Export2Doc('output ');">&#x1F4BE; Exportar como .doc</button>
           <!-- FIN DE PREVIEW -->
           <div v-if="!$data" class="spinner-border text-info" role="status">
             <span class="sr-only">Loading...</span>
