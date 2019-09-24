@@ -5,12 +5,10 @@ self.addEventListener('install', function(e) {
   e.waitUntil(
     caches.open('libredeuda').then(function(cache) {
       return cache.addAll([
-        '/',
         'index.html',
         'css/styles.css',
         'css/bootstrap.min.css',
         'css/animatedcss.css',
-        'js/app.js',
         'js/vue.min.js',
         'js/bootstrap.bundle.min.js',
         'js/jquery-3.3.1.slim.min.js',

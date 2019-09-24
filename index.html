@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="eS">
+<html lang="ES">
 
 <head>
   <meta charset="UTF-8">
@@ -216,7 +216,7 @@
                         <label class="custom-control-label" for="switchAysa">AySA por consorcio.</label>
                       </div>
                       <transition name="custom-classes-transition" enter-active-class="animated zoomInRight" leave-active-class="animated zoomOutUp">
-                        <input type="number" name="aysaCliente" id="aysaCliente" v-if="aysaConsorcio" v-model="aysaCliente" placeholder="N° de cliente">
+                        <input v-if="aysaConsorcio" v-model="aysaCliente" value="" type="number" name="aysaCliente" id="aysaCliente" placeholder="N° de cliente">
                       </transition>
                     </div>
                     <div class="pt-3">
@@ -225,9 +225,8 @@
                         <label class="custom-control-label" for="switchAbl">ABL por consorcio.</label>
                       </div>
                       <transition name="custom-classes-transition" enter-active-class="animated zoomInRight" leave-active-class="animated zoomOutUp">
-                        <input type="number" name="ablPartida" id="ablPartida" v-if="ablConsorcio" v-model="ablPartida" placeholder="N° de partida">
+                        <input v-if="ablConsorcio" v-model="ablPartida" value="" type="number" name="ablPartida" id="ablPartida" placeholder="N° de partida">
                       </transition>
-
                     </div>
                   </fieldset>
                 </div>

@@ -4,7 +4,6 @@
   "display": "standalone",
   "background_color": "#498294",
   "theme_color": "#498294",
-  "lang": "es-AR",
   "description": "La app definitiva para realizar los informes de libre deuda de un departamento.",
   "icons": [{
     "src": "img/icon192.png",
