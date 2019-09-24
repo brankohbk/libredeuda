@@ -11,6 +11,17 @@
 
   <link rel="stylesheet" href="css/styles.css">
 
+  <!-- icon in the highest resolution we need it for -->
+  <link rel="icon" sizes="512x512" href="img/icon512.png">
+  <!-- reuse same icon for Safari -->
+  <link rel="apple-touch-icon" href="img/icon512.png">
+  <!-- multiple icons for IE -->
+  <meta name="msapplication-square512x512logo" content="img/icon512.png">
+  <meta name="theme-color" content="#498294" />
+
+  <link rel="manifest" href="/manifest.json">
+
+
 
 </head>
 
@@ -317,6 +328,17 @@
   <script src="js/moment.min.js"></script>
   <script src="js/num2string.js"></script>
   <script src="js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      console.log("Will the service worker register?");
+      navigator.serviceWorker.register('service-worker.js')
+        .then(function(reg) {
+          console.log("Yes, it did.");
+        }).catch(function(err) {
+          console.log("No it didn't. This happened: ", err)
+        });
+    }
+  </script>
 </body>
 
 </html>

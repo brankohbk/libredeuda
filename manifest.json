@@ -1,0 +1,27 @@
+{
+  "short_name": "Libre Deuda by Restpoint",
+  "name": "Libre Deuda by Restpoint",
+  "display": "standalone",
+  "background_color": "#498294",
+  "theme_color": "#498294",
+  "lang": "es-AR",
+  "description": "La app definitiva para realizar los informes de libre deuda de un departamento.",
+  "icons": [{
+    "src": "img/icon192.png",
+    "type": "image/png",
+    "sizes": "192x192"
+  }, {
+    "src": "img/icon196.png",
+    "type": "image/png",
+    "sizes": "196x196"
+  }, {
+    "src": "img/icon256.png",
+    "type": "image/png",
+    "sizes": "256x256"
+  }, {
+    "src": "img/icon512.png",
+    "type": "image/png",
+    "sizes": "512x512"
+  }],
+  "start_url": "index.html"
+}
