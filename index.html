@@ -16,9 +16,9 @@
 
 <body class="bg-dark">
   <div id="app">
-    <h1 class="text-warning ml-5"><span class="">LIBRE DEUDA | </span><small class="text-secondary animated fadeIn delay-2s">Administración Bouteiller-Jordan</small></h1>
-    <div class="container col-11">
-      <div id="panels" class="row d-flex justify-content-between mb-5 pb-5 bg-light animated fadeInRight">
+    <h1 class="text-info ml-5"><span class="">LIBRE DEUDA | </span><small class="text-secondary animated fadeIn delay-2s">Administración Bouteiller-Jordan</small></h1>
+    <div class="container col-11 pt-2">
+      <div id="panels" class="row d-flex justify-content-between mb-5 pb-5 bg-light animated fadeIn">
         <div id="inputs" class="col-md-6 col-12 mb-5 ">
           <H2>INGRESO DE DATOS</H2>
           <!-- ACORDEON -->
@@ -177,7 +177,9 @@
                       <label class="custom-control-label" for="switchjuicios">El consorcio tiene juicios en proceso.</label>
                     </div>
                     <div>
-                      <transition name="custom-classes-transition" enter-active-class="animated zoomInDown" leave-active-class="animated zoomOutUp">
+                      <transition name="custom-classes-transition" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
+
+                        <!-- <transition name="custom-classes-transition" enter-active-class="animated zoomInRight" leave-active-class="animated zoomOutUp"> -->
                         <textarea v-if="juicio" v-model="juicioDescripcion" name="descripcionJuicio" id="descripcionJuicio" class="form-control" rows="10" placeholder="Ingrese descripcion de los procesos judiciales activos"></textarea>
                       </transition>
                     </div>
@@ -202,12 +204,19 @@
                         <input v-model="aysaConsorcio" value="false" type="checkbox" class="custom-control-input" id="switchAysa">
                         <label class="custom-control-label" for="switchAysa">AySA por consorcio.</label>
                       </div>
+                      <transition name="custom-classes-transition" enter-active-class="animated zoomInRight" leave-active-class="animated zoomOutUp">
+                        <input type="number" name="aysaCliente" id="aysaCliente" v-if="aysaConsorcio" v-model="aysaCliente" placeholder="N° de cliente">
+                      </transition>
                     </div>
-                    <div>
+                    <div class="pt-3">
                       <div class="custom-control custom-switch">
                         <input v-model="ablConsorcio" value="false" type="checkbox" class="custom-control-input" id="switchAbl">
                         <label class="custom-control-label" for="switchAbl">ABL por consorcio.</label>
                       </div>
+                      <transition name="custom-classes-transition" enter-active-class="animated zoomInRight" leave-active-class="animated zoomOutUp">
+                        <input type="number" name="ablPartida" id="ablPartida" v-if="ablConsorcio" v-model="ablPartida" placeholder="N° de partida">
+                      </transition>
+
                     </div>
                   </fieldset>
                 </div>
@@ -224,7 +233,8 @@
         <div id="preview" class="col-md-6 col-12">
           <h2>VISTA PREVIA</h2>
 
-          <div v-cloak class="border animated fadeInUp delay-1s" id="output ">
+          <!-- <div v-cloak class="border animated fadeInUp delay-1s" id="output "> -->
+          <div v-cloak class="border" id="output ">
             <p align=center style='font-size:10.0pt; mso-bidi-font-size:12.0pt;font-family: "Arial", "sans-serif" '>Nicolás Jordan<span style='mso-tab-count:1 '>            </span><span align=center>ADMINISTRACION
                 DE CONSORCIOS</span><span style='mso-tab-count:1 '>            </span><span align=right>J. Luciano Bouteiller</span>
             </p>
@@ -253,15 +263,18 @@
               <span v-else>Informamos que el edificio no posee procesos judiciales en curso de nuestro conocimiento.</span>
             </p>
             <p>
-              AySA {{porConsorcio(aysaConsorcio)}}.
+              AySA {{porConsorcio(aysaConsorcio)}}<span v-if="aysaConsorcio">, Cliente N° {{aysaCliente}} </span>.
             </p>
             <p>
-              ABL {{porConsorcio(ablConsorcio)}}.
+              ABL {{porConsorcio(ablConsorcio)}}<span v-if="ablConsorcio">, Partida N° {{ablPartida}} </span>.
             </p>
             <p>
               Sin otro particular, saluda a Usted cordialmente
 
             </p>
+            <br>
+            <br>
+            <br>
 
             <p class="MsoFooter">
 

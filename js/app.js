@@ -20,6 +20,8 @@ let ld = new Vue({
     juicio: false,
     aysaConsorcio: false,
     ablConsorcio: false,
+    aysaCliente: "",
+    ablPartida: "",
     juicioDescripcion: "",
     asegurado: [],
     textoCompleto: "",
