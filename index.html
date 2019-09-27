@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Libre Deuda 1.0 - Restpoint.com.ar</title>
+  <title>Libre Deuda 1.5 - Restpoint.com.ar</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link href="css/animatedcss.css" rel="stylesheet" type="text/css">
 
@@ -63,7 +63,17 @@
                     <label>Porcentual:
                         <input v-model="porcentual" type="number" name="porcentual" id="porcentual">%
                       </label>
+                    <div class="pt-3">
+                      <div class="custom-control custom-switch">
+                        <input v-model="cochera" value="false" type="checkbox" class="custom-control-input" id="switchcochera">
+                        <label class="custom-control-label" for="switchcochera">Incluye cochera.</label>
+                      </div>
+                      <transition name="custom-classes-transition" enter-active-class="animated zoomInRight" leave-active-class="animated zoomOutUp">
+                        <input v-if="cochera" v-model="cocheraUF" value="" type="number" name="cocheraUF" id="cocheraUF" placeholder="UF de cochera.">
+                      </transition>
+                    </div>
                   </fieldset>
+
                 </div>
               </div>
               <!--  -->
@@ -256,8 +266,8 @@
               CERTIFICADO DE LIBRE DEUDA
             </p>
             <p>
-              Por la presente, en mi carácter de administrador del consorcio de la calle {{consorcio}}, informo que la UF Nº {{uf}} ({{depto}}) a nombre de {{propietario}} al día de la fecha <span v-if="deuda==0">no </span>registra deuda en concepto de
-              expensas <span v-if="deuda>0">por un total de $ {{saldoFormateado(deuda)}}</span>.
+              Por la presente, en mi carácter de administrador del consorcio de la calle {{consorcio}}, informo que la UF Nº {{uf}} ({{depto}})<span v-if="cochera">, y la cochera adjunta Unidad Funcional N°{{cocheraUF}},</span> a nombre de {{propietario}}
+              al día de la fecha <span v-if="deuda==0">no </span>registra deuda en concepto de expensas <span v-if="deuda>0">por un total de $ {{saldoFormateado(deuda)}}</span>.
             </p>
             <p>
               Las expensas se abonan mes vencido. Quedan pendientes por abonar las expensas del periodo {{moment(ultimaLiquidacion).format('MMMM YYYY')}} con vencimiento el {{moment(vencimiento).format('LL')}} por un monto aproximado de $ {{saldoFormateado(expensaNeta)}}.-

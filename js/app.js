@@ -7,6 +7,8 @@ let ld = new Vue({
     piso: "",
     letra: "",
     propietario: "",
+    cochera: false,
+    cocheraUF: "",
     fondoCaja: "",
     deuda: "",
     expensaNeta: "",
