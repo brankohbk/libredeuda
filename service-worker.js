@@ -25,7 +25,7 @@ self.addEventListener('fetch', function(event) {
   event.respondWith(
     // si la info esta cacheada, muestra eso, caso contrario realiza el fetch al server.
     caches.match(event.request).then(function(response) {
-      return fetch(event.request) || response;
+      return response || fetch(event.request);
     })
   );
 });

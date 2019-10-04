@@ -254,7 +254,7 @@
           <h2>VISTA PREVIA</h2>
 
           <!-- <div v-cloak class="border animated fadeInUp delay-1s" id="output "> -->
-          <div v-cloak class="border" id="output ">
+          <div v-cloak class="border px-3" id="output_">
             <p align=center style='font-size:10.0pt; mso-bidi-font-size:12.0pt;font-family: "Arial", "sans-serif" '>Nicolás Jordan<span style='mso-tab-count:1 '>            </span><span align=center>ADMINISTRACION
                 DE CONSORCIOS</span><span style='mso-tab-count:1 '>            </span><span align=right>J. Luciano Bouteiller</span>
             </p>
@@ -308,7 +308,7 @@
 
             <!-- FIN DE OUTPUT -->
           </div>
-          <button v-cloak class="mt-3 float-right btn btn-success" @click="Export2Doc('output ');">&#x1F4BE; Exportar como .doc</button>
+          <button v-cloak class="mt-3 float-right btn btn-success" @click="Export2Doc('output_');">&#x1F4BE; Exportar como .doc</button>
           <!-- FIN DE PREVIEW -->
           <div v-if="!$data" class="spinner-border text-info" role="status">
             <span class="sr-only">Loading...</span>
