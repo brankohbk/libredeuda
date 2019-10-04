@@ -3,7 +3,9 @@
 }
 
 #output_ {
-  background-color: rgba(0, 0, 0, 0.041)
+  background-color: rgba(0, 0, 0, 0.041);
+  max-height: 60vh;
+  overflow-y: scroll;
 }
 
 #panels {
