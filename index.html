@@ -45,32 +45,35 @@
               </div>
               <div id="collapseConsorcio" class="collapse" aria-labelledby="headingConsorcio" data-parent="#acordeon">
                 <div class="card-body">
-                  <fieldset class="d-flex">
-                    <label class="">Calle y número:
-                      <input v-model="consorcio" type="text" name="consorcio" id="consorcio">
+                  <fieldset>
+                    <label >Calle y número:
+                      <input class="form-control" v-model="consorcio" type="text" name="consorcio" id="consorcio">
                     </label>
                     <label>Unidad Funcional:
-                        <input v-model="uf" type="number" name="uf" id="uf">
+                        <input class="form-control" v-model="uf" type="number" name="uf" id="uf">
                       </label>
                     <label class="">Piso:
-                        <input v-model="piso" type="text" name="departamento" id="letra">
+                        <input class="form-control" v-model="piso" type="text" name="departamento" id="piso">
                       </label>
                     <label class="">Letra/Departamento:
-                        <input v-model="letra" type="text" name="departamento" id="letra">
+                        <input class="form-control" v-model="letra" type="text" name="departamento" id="letra">
                       </label>
                     <label>Propietario:
-                        <input v-model="propietario" type="text" name="propietario" id="propietario">
+                        <input class="form-control" v-model="propietario" type="text" name="propietario" id="propietario">
                       </label>
                     <label>Porcentual:
-                        <input v-model="porcentual" type="number" name="porcentual" id="porcentual">%
+                      <div class="input-group">
+                        <input v-model="porcentual" class="form-control" type="number" name="porcentual" id="porcentual">
+                        <span class="input-group-text">&percnt;</span>
+                      </div>
                       </label>
-                    <div class="pt-3">
+                    <div>
                       <div class="custom-control custom-switch">
                         <input v-model="cochera" value="false" type="checkbox" class="custom-control-input" id="switchcochera">
                         <label class="custom-control-label" for="switchcochera">Incluye cochera.</label>
                       </div>
                       <transition name="custom-classes-transition" enter-active-class="animated zoomInRight" leave-active-class="animated zoomOutUp">
-                        <input v-if="cochera" v-model="cocheraUF" value="" type="number" name="cocheraUF" id="cocheraUF" placeholder="UF de cochera.">
+                        <input class="form-control" v-if="cochera" v-model="cocheraUF" value="" type="number" name="cocheraUF" id="cocheraUF" placeholder="UF de cochera.">
                       </transition>
                     </div>
                   </fieldset>
@@ -91,18 +94,13 @@
                 <div class="card-body">
                   <fieldset>
                     <label>Hoy:
-                      <input v-model="fecha" type="date" name="fecha" id="fecha">
+                      <input class="form-control" v-model="fecha" type="date" name="fecha" id="fecha">
                     </label>
                     <label>Próximo periodo a ser liquidado:
-                        <input v-model="ultimaLiquidacion" type="month" name="ultimaLiquidacion" id="ultimaLiquidacion">
-
-                      <!-- <select name="meses" id="meses">
-                        <option v-for="mes in meses" :value="mes" @click="armarUltimaLiquidacion('mes')">{{mes}}</option>
-                      </select>
-                      <input v-model="anhoLiquidado" type="text" name="anhoLiquidado" id="anhoLiquidado"> -->
+                        <input class="form-control" v-model="ultimaLiquidacion" type="month" name="ultimaLiquidacion" id="ultimaLiquidacion">
                     </label>
                     <label>Vencimiento de la próxima liquidación:
-                        <input v-model="vencimiento" type="date" name="vencimiento" id="vencimiento">
+                        <input class="form-control" v-model="vencimiento" type="date" name="vencimiento" id="vencimiento">
                       </label>
                   </fieldset>
                 </div>
@@ -121,13 +119,22 @@
                 <div class="card-body">
                   <fieldset>
                     <label>Saldo pendiente: 
-                      $<input v-model="deuda" type="number" name="pendiente" id="pendiente">
+                      <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input class="form-control" v-model="deuda" type="number" name="pendiente" id="pendiente">
+                      </div>
                     </label>
                     <label>Expensas netas:
-                      $<input v-model="expensaNeta" type="number" name="expensas" id="expensas">
+                      <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input class="form-control" v-model="expensaNeta" type="number" name="expensas" id="expensas">
+                      </div>
                     </label>
                     <label>Fondo de caja:
-                      $<input v-model="fondoCaja" type="number" name="fondoCaja" id="fondoCaja">
+                      <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input class="form-control" v-model="fondoCaja" type="number" name="fondoCaja" id="fondoCaja">
+                      </div>
                     </label>
                   </fieldset>
                 </div>
@@ -148,20 +155,20 @@
                     <p>
                       El edificio se encuentra asegurado contra:
                     </p>
-                    <ul>
-                      <li>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
                         <div class="custom-control custom-switch">
                           <input v-model="asegurado" type="checkbox" class="custom-control-input" value="incendio" id="seguroIncendio">
                           <label class="custom-control-label" for="seguroIncendio">Incendio.</label>
                         </div>
                       </li>
-                      <li>
+                      <li class="list-group-item">
                         <div class="custom-control custom-switch">
                           <input v-model="asegurado" type="checkbox" class="custom-control-input" value="rotura de cristales" id="seguroCristales">
                           <label class="custom-control-label" for="seguroCristales">Rotura de cristales.</label>
                         </div>
                       </li>
-                      <li>
+                      <li class="list-group-item">
                         <div class="custom-control custom-switch">
                           <input v-model="asegurado" type="checkbox" class="custom-control-input" value="robo" id="seguroRobo">
                           <label class="custom-control-label" for="seguroRobo">Robo.</label>
@@ -169,13 +176,13 @@
                       </li>
                     </ul>
                     <div><label>En la compañía aseguradora:
-                        <input v-model="aseguradora" type="text" name="seguro" id="aseguradora">
+                        <input class="form-control" v-model="aseguradora" type="text" name="seguro" id="aseguradora">
                         </label></div>
                     <div><label>Póliza N°:
-                        <input v-model="poliza" type="text" name="seguro" id="poliza">
+                        <input class="form-control" v-model="poliza" type="text" name="seguro" id="poliza">
                         </label></div>
                     <div><label>Vigente hasta:
-                            <input v-model="vigenciaSeguro" type="date" name="seguro" id="vigencia">
+                            <input class="form-control" v-model="vigenciaSeguro" type="date" name="seguro" id="vigencia">
                             </label></div>
                   </fieldset>
                 </div>
@@ -200,9 +207,7 @@
                     </div>
                     <div>
                       <transition name="custom-classes-transition" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
-
-                        <!-- <transition name="custom-classes-transition" enter-active-class="animated zoomInRight" leave-active-class="animated zoomOutUp"> -->
-                        <textarea v-if="juicio" v-model="juicioDescripcion" name="descripcionJuicio" id="descripcionJuicio" class="form-control" rows="10" placeholder="Ingrese descripcion de los procesos judiciales activos"></textarea>
+                      <textarea v-if="juicio" v-model="juicioDescripcion" name="descripcionJuicio" id="descripcionJuicio" class="form-control" rows="10" placeholder="Ingrese descripcion de los procesos judiciales activos"></textarea>
                       </transition>
                     </div>
                   </fieldset>
@@ -218,7 +223,7 @@
                   </button>
                 </h2>
               </div>
-              <div id="collapseImpuestos" class="collapse" aria-labelledby="headingImpuestos" data-parent="#acordeon">
+              <div id="collapseImpuestos" class="collapse show" aria-labelledby="headingImpuestos" data-parent="#acordeon">
                 <div class="card-body">
                   <fieldset>
                     <div>
@@ -227,16 +232,16 @@
                         <label class="custom-control-label" for="switchAysa">AySA por consorcio.</label>
                       </div>
                       <transition name="custom-classes-transition" enter-active-class="animated zoomInRight" leave-active-class="animated zoomOutUp">
-                        <input v-if="aysaConsorcio" v-model="aysaCliente" value="" type="number" name="aysaCliente" id="aysaCliente" placeholder="N° de cliente">
+                        <input class="form-control" v-if="aysaConsorcio" v-model="aysaCliente" value="" type="number" name="aysaCliente" id="aysaCliente" placeholder="N° de cliente">
                       </transition>
                     </div>
-                    <div class="pt-3">
+                    <div>
                       <div class="custom-control custom-switch">
                         <input v-model="ablConsorcio" value="false" type="checkbox" class="custom-control-input" id="switchAbl">
                         <label class="custom-control-label" for="switchAbl">ABL por consorcio.</label>
                       </div>
                       <transition name="custom-classes-transition" enter-active-class="animated zoomInRight" leave-active-class="animated zoomOutUp">
-                        <input v-if="ablConsorcio" v-model="ablPartida" value="" type="number" name="ablPartida" id="ablPartida" placeholder="N° de partida">
+                        <input class="form-control" v-if="ablConsorcio" v-model="ablPartida" value="" type="number" name="ablPartida" id="ablPartida" placeholder="N° de partida">
                       </transition>
                     </div>
                   </fieldset>
@@ -310,7 +315,7 @@
             <!-- FIN DE OUTPUT -->
           </div>
           <!-- BOTON MERCADOLIBRE -->
-          <a mp-mode="dftl" href="https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=40219556-c80b8e2e-1785-4286-9e3b-751db1455fe4" name="MP-payButton" class='green-tr-l-rn-arall'>Donar $15</a>
+          <!-- <a mp-mode="dftl" href="https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=40219556-c80b8e2e-1785-4286-9e3b-751db1455fe4" name="MP-payButton" class='green-tr-l-rn-arall'>Donar $15</a>
           <script type="text/javascript">
             (function() {
               function $MPC_load() {
@@ -326,7 +331,7 @@
               }
               window.$MPC_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;
             })();
-          </script>
+          </script> -->
 
 
 
